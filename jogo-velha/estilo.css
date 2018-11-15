@@ -1,0 +1,25 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+#tabuleiro {
+	width: 500px;
+	height: 500px;
+	margin: 10px auto;
+	background-color: #000000;
+}
+.casa {
+	width: 160px;
+	height: 160px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	float: left;
+	background-color: #FFFFFF;
+}
+.ultima-direita {
+	margin-right: 0px;
+}
+p {
+	font-size: 140px;
+	text-align: center;
+}

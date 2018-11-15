@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="author" content="Cleber Tomazoni">
+		<link rel="stylesheet" href="estilo.css">
+		<script src="funcoes.js"></script>
+		<title>WebJogos - Jogo da Velha</title>
+	</head>
+	<body>
+		<div id="tabuleiro">
+			<div class="casa" onclick="marcar('0');">
+				<p class="campo" id="0"></p>
+			</div>
+			<div class="casa" onclick="marcar('1');">
+				<p class="campo" id="1"></p>
+			</div>
+			<div class="casa ultima-direita" onclick="marcar('2');">
+				<p class="campo" id="2"></p>
+			</div>
+			<div class="casa" onclick="marcar('3');">
+				<p class="campo" id="3"></p>
+			</div>
+			<div class="casa" onclick="marcar('4');">
+				<p class="campo" id="4"></p>
+			</div>
+			<div class="casa ultima-direita" onclick="marcar('5');">
+				<p class="campo" id="5"></p>
+			</div>
+			<div class="casa" onclick="marcar('6');">
+				<p class="campo" id="6"></p>
+			</div>
+			<div class="casa" onclick="marcar('7');">
+				<p class="campo" id="7"></p>
+			</div>
+			<div class="casa ultima-direita" onclick="marcar('8');">
+				<p class="campo" id="8"></p>
+			</div>
+		</div>
+		<button onclick="reiniciarPartida()">Reiniciar Partida</button>
+	</body>
+</html>
