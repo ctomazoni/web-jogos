@@ -1,0 +1,35 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+#tabuleiro {
+	width: 480px;
+	height: 480px;
+	margin: 10px auto;
+	background-color: #000000;
+}
+.casa {
+	width: 60px;
+	height: 60px;
+	float: left;
+}
+.cor1 {
+	background-color: #006000;
+}
+.cor2 {
+	background-color: #808000;
+}
+.peca {
+	width: 44px;
+	height: 44px;
+	margin: 8px;
+	border-radius: 100px;
+}
+.branca {
+	background-color: #FFFFFF;
+	/*box-shadow: 3px 3px #888888;*/
+}
+.preta {
+	background-color: #000000;
+	/*box-shadow: 3px 3px #444444;*/
+}
