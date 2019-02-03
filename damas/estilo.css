@@ -2,11 +2,51 @@
 	margin: 0px;
 	padding: 0px;
 }
+body {
+	background-color: #888888;
+}
+#placar {
+	width: 480px;
+	height: 70px;
+	margin: 10px auto;
+	background-color: #408090;
+}
 #tabuleiro {
 	width: 480px;
 	height: 480px;
 	margin: 10px auto;
 	background-color: #000000;
+}
+#placar p {
+	padding: 5px;
+	font-size: 26px;
+	text-align: center;
+}
+#info {
+	color: #FFDD00;
+}
+.desc-jog {
+	width: 180px;
+	height: 35px;
+}
+.pont-jog {
+	width: 50px;
+	height: 35px;
+}
+.cb {
+	color: #FFFFFF;
+}
+.cp {
+	color: #000000;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.neg {
+	font-weight: bold;
 }
 .casa {
 	width: 60px;
