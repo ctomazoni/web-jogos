@@ -80,3 +80,16 @@ body {
 .preta {
 	background-color: #000000;
 }
+.dama {
+	font-size: 30px;
+	margin-left: 10px;
+}
+.dama:hover {
+	cursor: default;
+}
+.d-branca {
+	color: #000000;/*Preto*/
+}
+.d-preta {
+	color: #FFFFFF;/*Branco*/
+}

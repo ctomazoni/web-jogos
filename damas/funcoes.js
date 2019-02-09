@@ -3,7 +3,10 @@ function Peca(id, pos) {
 	this.cor = id.startsWith('b') ? 'branca' : 'preta',
 	this.posicao = pos,
 	this.dama = false,
-	this.promocao = function() { this.dama = true }
+	this.promocao = function() {
+		this.dama = true;
+		document.getElementById(this.id).innerHTML = '<span class="dama d-'+this.cor+'">&#10031;</span>';
+	}
 }
 var vez;
 var pecas = [];
@@ -22,6 +25,8 @@ function mover(peca, destino) {
 		if (pos < 9 || pos > 56) {
 			peca.promocao();
 		}
+	} else {
+		document.getElementById(peca.id).innerHTML = '<span class="dama d-'+peca.cor+'">&#10031;</span>';
 	}
 	if (peca.cor == 'branca') {
 		vez = 'p';
