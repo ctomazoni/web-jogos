@@ -205,6 +205,14 @@ function selecionar() {
 		}
 	}
 }
+function alterarDesc(jog) {
+	if (vez == undefined) {
+		var novaDesc = prompt('Nome do Jogador '+(jog == 'djb' ? 'Branco' : 'Preto'), document.getElementById(jog).innerHTML);
+		if (novaDesc) {
+			document.getElementById(jog).innerHTML = novaDesc;
+		}
+	}
+}
 function atualizarPlacar(cod) {
 	if (cod == 'info') {
 		document.getElementById('info').innerHTML = 'Vez de '+document.getElementById(vez == 'b' ? 'djb' : 'djp').innerHTML+'.';
@@ -215,12 +223,6 @@ function atualizarPlacar(cod) {
 			document.getElementById('info').innerHTML = document.getElementById('djb').innerHTML+' venceu a partida.';
 		} else if (qtdPecasBrancas == 0) {
 			document.getElementById('info').innerHTML = document.getElementById('djp').innerHTML+' venceu a partida.';
-		}
-	} else if (cod == 'desc') {
-		document.getElementById('djb').innerHTML = 'J1';
-		document.getElementById('djp').innerHTML = 'J2';
-		if (vez != undefined) {
-			atualizarPlacar('info');
 		}
 	}
 }
