@@ -12,6 +12,7 @@ var vez;
 var pecas = [];
 var captP = [];
 var captC = [];
+var pecaContinuar;
 var pecaSelecionada = '';
 var casasSelecionadas = [];
 var qtdPecasBrancas = 12;
@@ -28,16 +29,20 @@ function mover(peca, destino) {
 	} else {
 		document.getElementById(peca.id).innerHTML = '<span class="dama d-'+peca.cor+'">&#10031;</span>';
 	}
-	if (peca.cor == 'branca') {
-		vez = 'p';
-	} else {
-		vez = 'b';
-	}
-	atualizarPlacar('info');
+	pecaContinuar = null;
 	if (document.getElementById(destino).classList.contains('capt')) {
 		removerPecaTabuleiro(destino);
+		if (vez != 'x') {
+			pecaContinuar = peca;
+		}
+	} else {
+		if (peca.cor == 'branca') {
+			vez = 'p';
+		} else {
+			vez = 'b';
+		}
+		atualizarPlacar('info');
 	}
-	desmarcarPossiveisCapturas();
 }
 function removerPecaTabuleiro(pos) {
 	var codPecaCapt;
@@ -92,6 +97,7 @@ function desmarcarCasasSelecionadas() {
 	while (casasSelecionadas.length > 0) {
 		document.getElementById(casasSelecionadas.pop()).classList.remove('c-selecionada');
 	}
+	desmarcarPossiveisCapturas();
 }
 function marcarPossivelCaptura(peca, casa) {
 	captP.push(peca);
@@ -129,7 +135,9 @@ function selecionarC(c) {
 	if (coord.coluna > 1 && coord.linha < 8 && (peca.cor == 'branca' || peca.dama)) {
 		var casa = 'c'+(coord.numPos+7);
 		if (!obterSePecaPosicao(casa)) {
-			casasSelecionadas.push(casa);
+			if (!pecaContinuar) {
+				casasSelecionadas.push(casa);
+			}
 		} else {
 			var peca2 = obterObjPeca(obterIdPecaPosicao(casa));
 			var coord2 = obterCoordPosicao(peca2);
@@ -145,7 +153,9 @@ function selecionarC(c) {
 	if (coord.coluna < 8 && coord.linha < 8 && (peca.cor == 'branca' || peca.dama)) {
 		var casa = 'c'+(coord.numPos+9);
 		if (!obterSePecaPosicao(casa)) {
-			casasSelecionadas.push(casa);
+			if (!pecaContinuar) {
+				casasSelecionadas.push(casa);
+			}
 		} else {
 			var peca2 = obterObjPeca(obterIdPecaPosicao(casa));
 			var coord2 = obterCoordPosicao(peca2);
@@ -161,7 +171,9 @@ function selecionarC(c) {
 	if (coord.coluna > 1 && coord.linha > 1 && (peca.cor == 'preta' || peca.dama)) {
 		var casa = 'c'+(coord.numPos-9);
 		if (!obterSePecaPosicao(casa)) {
-			casasSelecionadas.push(casa);
+			if (!pecaContinuar) {
+				casasSelecionadas.push(casa);
+			}
 		} else {
 			var peca2 = obterObjPeca(obterIdPecaPosicao(casa));
 			var coord2 = obterCoordPosicao(peca2);
@@ -177,7 +189,9 @@ function selecionarC(c) {
 	if (coord.coluna < 8 && coord.linha > 1 && (peca.cor == 'preta' || peca.dama)) {
 		var casa = 'c'+(coord.numPos-7);
 		if (!obterSePecaPosicao(casa)) {
-			casasSelecionadas.push(casa);
+			if (!pecaContinuar) {
+				casasSelecionadas.push(casa);
+			}
 		} else {
 			var peca2 = obterObjPeca(obterIdPecaPosicao(casa));
 			var coord2 = obterCoordPosicao(peca2);
@@ -194,22 +208,50 @@ function selecionarC(c) {
 		document.getElementById(casasSelecionadas[i]).classList.toggle('c-selecionada');
 	}
 }
-function selecionar() {
-	if (obterSePecaPosicao(this.id)) {
+function continuarJogada() {
+	selecionarP(pecaContinuar.id);
+	if (casasSelecionadas.length == 0) {
 		desmarcarCasasSelecionadas();
-		selecionarP(obterIdPecaPosicao(this.id));
-	} else {
-		if (document.getElementById(this.id).classList.contains('c-selecionada')) {
-			mover(obterObjPeca(pecaSelecionada), this.id);
-			desmarcarCasasSelecionadas();
+		pecaSelecionada = '';
+		document.getElementById(pecaContinuar.id).classList.remove('p-selecionada');
+		if (pecaContinuar.cor == 'branca') {
+			vez = 'p';
+		} else {
+			vez = 'b';
+		}
+		atualizarPlacar('info');
+		pecaContinuar = null;
+	}
+}
+function selecionar() {
+	if (vez != 'x') {
+		if (obterSePecaPosicao(this.id)) {
+			if (!pecaContinuar && (vez == undefined || obterIdPecaPosicao(this.id).startsWith(vez))) {
+				desmarcarCasasSelecionadas();
+				selecionarP(obterIdPecaPosicao(this.id));
+			}
+		} else {
+			if (document.getElementById(this.id).classList.contains('c-selecionada')) {
+				mover(obterObjPeca(pecaSelecionada), this.id);
+				desmarcarCasasSelecionadas();
+				if (pecaContinuar) {
+					continuarJogada();
+				}
+			}
 		}
 	}
 }
 function alterarDesc(jog) {
 	if (vez == undefined) {
+		var descOutroJog = document.getElementById(jog == 'djb' ? 'djp' : 'djb').innerHTML;
 		var novaDesc = prompt('Nome do Jogador '+(jog == 'djb' ? 'Branco' : 'Preto'), document.getElementById(jog).innerHTML);
 		if (novaDesc) {
-			document.getElementById(jog).innerHTML = novaDesc;
+			if (novaDesc != descOutroJog) {
+				document.getElementById(jog).innerHTML = novaDesc;
+			} else {
+				alert('O nome dos jogadores não pode ser igual.');
+				alterarDesc(jog);
+			}
 		}
 	}
 }
@@ -220,8 +262,10 @@ function atualizarPlacar(cod) {
 		document.getElementById('pjb').innerHTML = 12 - qtdPecasPretas;
 		document.getElementById('pjp').innerHTML = 12 - qtdPecasBrancas;
 		if (qtdPecasPretas == 0) {
+			vez = 'x';
 			document.getElementById('info').innerHTML = document.getElementById('djb').innerHTML+' venceu a partida.';
 		} else if (qtdPecasBrancas == 0) {
+			vez = 'x';
 			document.getElementById('info').innerHTML = document.getElementById('djp').innerHTML+' venceu a partida.';
 		}
 	}
@@ -235,5 +279,15 @@ function adicionarEventos() {
 			pecas.push(peca);
 		}
 		document.getElementById(casa).onclick = selecionar;
+	}
+}
+function reiniciar() {
+	if (vez && (vez == 'x' || confirm('Ao clicar em OK, todo o andamento da partida será perdido. Tem certeza que deseja continuar?'))) {
+		location.reload();
+	}
+}
+function voltar() {
+	if (!vez || vez == 'x' || confirm('Ao clicar em OK, todo o andamento da partida será perdido. Tem certeza que deseja continuar?')) {
+		location.href = '../index.html';
 	}
 }

@@ -25,6 +25,19 @@ body {
 #info {
 	color: #FFDD00;
 }
+#menu {
+	width: 480px;
+	height: 36px;
+	margin: 10px auto;
+	text-align: center;
+}
+#menu button {
+	padding: 8px;
+	color: #FFDD00;
+	font-weight: bold;
+	border: 2px #FFDD00 solid;
+	background-color: #408090;
+}
 .desc-jog {
 	width: 180px;
 	height: 35px;
