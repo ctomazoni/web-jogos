@@ -1,0 +1,16 @@
+#grid {
+	margin: 10px auto;
+}
+#grid td table {
+	border: 2px solid #000000;
+}
+.quadrante {
+	margin: -3px;
+}
+input {
+	width: 40px;
+	height: 40px;
+	font-size: 25px;
+	text-align: center;
+	margin: -3px;
+}

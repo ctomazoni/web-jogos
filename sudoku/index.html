@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="Cleber Tomazoni">
+		<link rel="stylesheet" href="estilo.css">
+		<script src="../web-framework/js/array.js"></script>
+		<script src="funcoes.js"></script>
+		<title>WebJogos - Sudoku</title>
+	</head>
+	<body>
+		<table id="grid">
+			<tr>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin1"></td>
+							<td><input type="text" maxlength="1" id="col2_lin1"></td>
+							<td><input type="text" maxlength="1" id="col3_lin1"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin2"></td>
+							<td><input type="text" maxlength="1" id="col2_lin2"></td>
+							<td><input type="text" maxlength="1" id="col3_lin2"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin3"></td>
+							<td><input type="text" maxlength="1" id="col2_lin3"></td>
+							<td><input type="text" maxlength="1" id="col3_lin3"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin1"></td>
+							<td><input type="text" maxlength="1" id="col5_lin1"></td>
+							<td><input type="text" maxlength="1" id="col6_lin1"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin2"></td>
+							<td><input type="text" maxlength="1" id="col5_lin2"></td>
+							<td><input type="text" maxlength="1" id="col6_lin2"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin3"></td>
+							<td><input type="text" maxlength="1" id="col5_lin3"></td>
+							<td><input type="text" maxlength="1" id="col6_lin3"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin1"></td>
+							<td><input type="text" maxlength="1" id="col8_lin1"></td>
+							<td><input type="text" maxlength="1" id="col9_lin1"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin2"></td>
+							<td><input type="text" maxlength="1" id="col8_lin2"></td>
+							<td><input type="text" maxlength="1" id="col9_lin2"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin3"></td>
+							<td><input type="text" maxlength="1" id="col8_lin3"></td>
+							<td><input type="text" maxlength="1" id="col9_lin3"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin4"></td>
+							<td><input type="text" maxlength="1" id="col2_lin4"></td>
+							<td><input type="text" maxlength="1" id="col3_lin4"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin5"></td>
+							<td><input type="text" maxlength="1" id="col2_lin5"></td>
+							<td><input type="text" maxlength="1" id="col3_lin5"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin6"></td>
+							<td><input type="text" maxlength="1" id="col2_lin6"></td>
+							<td><input type="text" maxlength="1" id="col3_lin6"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin4"></td>
+							<td><input type="text" maxlength="1" id="col5_lin4"></td>
+							<td><input type="text" maxlength="1" id="col6_lin4"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin5"></td>
+							<td><input type="text" maxlength="1" id="col5_lin5"></td>
+							<td><input type="text" maxlength="1" id="col6_lin5"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin6"></td>
+							<td><input type="text" maxlength="1" id="col5_lin6"></td>
+							<td><input type="text" maxlength="1" id="col6_lin6"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin4"></td>
+							<td><input type="text" maxlength="1" id="col8_lin4"></td>
+							<td><input type="text" maxlength="1" id="col9_lin4"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin5"></td>
+							<td><input type="text" maxlength="1" id="col8_lin5"></td>
+							<td><input type="text" maxlength="1" id="col9_lin5"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin6"></td>
+							<td><input type="text" maxlength="1" id="col8_lin6"></td>
+							<td><input type="text" maxlength="1" id="col9_lin6"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin7"></td>
+							<td><input type="text" maxlength="1" id="col2_lin7"></td>
+							<td><input type="text" maxlength="1" id="col3_lin7"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin8"></td>
+							<td><input type="text" maxlength="1" id="col2_lin8"></td>
+							<td><input type="text" maxlength="1" id="col3_lin8"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col1_lin9"></td>
+							<td><input type="text" maxlength="1" id="col2_lin9"></td>
+							<td><input type="text" maxlength="1" id="col3_lin9"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin7"></td>
+							<td><input type="text" maxlength="1" id="col5_lin7"></td>
+							<td><input type="text" maxlength="1" id="col6_lin7"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin8"></td>
+							<td><input type="text" maxlength="1" id="col5_lin8"></td>
+							<td><input type="text" maxlength="1" id="col6_lin8"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col4_lin9"></td>
+							<td><input type="text" maxlength="1" id="col5_lin9"></td>
+							<td><input type="text" maxlength="1" id="col6_lin9"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table class="quadrante">
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin7"></td>
+							<td><input type="text" maxlength="1" id="col8_lin7"></td>
+							<td><input type="text" maxlength="1" id="col9_lin7"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin8"></td>
+							<td><input type="text" maxlength="1" id="col8_lin8"></td>
+							<td><input type="text" maxlength="1" id="col9_lin8"></td>
+						</tr>
+						<tr>
+							<td><input type="text" maxlength="1" id="col7_lin9"></td>
+							<td><input type="text" maxlength="1" id="col8_lin9"></td>
+							<td><input type="text" maxlength="1" id="col9_lin9"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<button onclick="inicializarMatriz();">Inicializar Matriz</button>
+		<button onclick="solucionarSudoku();">Solucionar Sudoku</button>
+		<button onclick="montarSudokuEmTela();">Montar Sudoku em Tela</button>
+	</body>
+</html>
