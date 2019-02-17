@@ -4,13 +4,40 @@ function Quadrante(qua, col, lin) {
 	this.l = lin
 }
 var sudoku;
-var continuar = true;
+var reiniciar = true;
 function get(col, lin) {
 	return sudoku[col-1][lin-1];
 }
 function set(col, lin, val) {
 	sudoku[col-1][lin-1] = val;
-	continuar = true;
+	reiniciar = true;
+}
+function obterNumQuad(c, l) {
+	if ([1, 2, 3].includes(l)) {
+		if ([1, 2, 3].includes(c)) {
+			return 1;
+		} else if ([4, 5, 6].includes(c)) {
+			return 2;
+		} else {
+			return 3;
+		}
+	} else if ([4, 5, 6].includes(l)) {
+		if ([1, 2, 3].includes(c)) {
+			return 4;
+		} else if ([4, 5, 6].includes(c)) {
+			return 5;
+		} else {
+			return 6;
+		}
+	} else {
+		if ([1, 2, 3].includes(c)) {
+			return 7;
+		} else if ([4, 5, 6].includes(c)) {
+			return 8;
+		} else {
+			return 9;
+		}
+	}
 }
 function obterQuadrante(qua) {
 	var colA = 7;
@@ -60,6 +87,29 @@ function obterQuadrante(qua) {
 	linQ.push(linB);
 	linQ.push(linC);
 	return new Quadrante(quadro, colQ, linQ);
+}
+function analiseSimultanea(col, lin) {
+	if (!get(col, lin)) {
+		var possibilidades = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+		var quadrante = obterQuadrante(obterNumQuad(col, lin));
+		for (var i = 1; i <= 9; i++) {
+			var valor = get(col, i);
+			if (valor) {
+				removeArrayElementByValue(possibilidades, valor);
+			}
+			valor = get(i, lin);
+			if (valor) {
+				removeArrayElementByValue(possibilidades, valor);
+			}
+			valor = quadrante.q[i-1];
+			if (valor) {
+				removeArrayElementByValue(possibilidades, valor);
+			}
+		}
+		if (possibilidades.length == 1) {
+			set(col, lin, possibilidades[0]);
+		}
+	}
 }
 function verificaQuadrante(qua) {
 	var possibilidades = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -126,14 +176,18 @@ function inicializarMatriz() {
 }
 function solucionarSudoku() {
 	//inicializarMatriz();
-	while (continuar) {
+	while (reiniciar) {
+		reiniciar = false;
 		for (var i = 1; i <= 9; i++) {
-			continuar = false;
 			verificaLinha(i);
 			verificaColuna(i);
 			verificaQuadrante(i);
-			if (!continuar) {
-				//
+		}
+		if (!reiniciar) {
+			for (var i = 1; i <= 9; i++) {
+				for (var j = 1; j <= 9; j++) {
+					analiseSimultanea(i, j);
+				}
 			}
 		}
 	}
