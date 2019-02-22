@@ -4,12 +4,14 @@ function Quadrante(qua, col, lin) {
 	this.l = lin
 }
 var sudoku;
+var restantes;
 var reiniciar = true;
 function get(col, lin) {
 	return sudoku[col-1][lin-1];
 }
 function set(col, lin, val) {
 	sudoku[col-1][lin-1] = val;
+	verificarPossibRestantes(col, lin);
 	reiniciar = true;
 }
 function obterNumQuad(c, l) {
@@ -111,7 +113,7 @@ function analiseSimultanea(col, lin) {
 		}
 	}
 }
-function verificaQuadrante(qua) {
+function verificarQuadrante(qua) {
 	var possibilidades = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 	var posicao;
 	var quadrante = obterQuadrante(qua);
@@ -127,7 +129,7 @@ function verificaQuadrante(qua) {
 		set(quadrante.c[posicao], quadrante.l[posicao], possibilidades[0]);
 	}
 }
-function verificaColuna(col) {
+function verificarColuna(col) {
 	var possibilidades = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 	var posicao;
 	for (var i = 1; i <= 9; i++) {
@@ -142,7 +144,7 @@ function verificaColuna(col) {
 		set(col, posicao, possibilidades[0]);
 	}
 }
-function verificaLinha(lin) {
+function verificarLinha(lin) {
 	var possibilidades = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 	var posicao;
 	for (var i = 1; i <= 9; i++) {
@@ -164,14 +166,29 @@ function montarSudokuEmTela() {
 		}
 	}
 }
+function verificarPossibRestantes(col, lin) {
+	var valor = sudoku[col][lin];
+	if (valor) {
+		var quad = obterQuadrante(obterNumQuad(col+1, lin+1));
+		for (var i = 0; i < 9; i++) {
+			removeArrayElementByValue(restantes[col][i], valor);
+			removeArrayElementByValue(restantes[i][lin], valor);
+			removeArrayElementByValue(restantes[quad.c[i]-1][quad.l[i]-1], valor);
+		}
+	}
+}
 function inicializarMatriz() {
 	sudoku = [];
+	restantes = [];
 	for (var i = 1; i <= 9; i++) {
 		var linhas = [];
+		var restantesAux = [];
 		for (var j = 1; j <= 9; j++) {
 			linhas.push(document.getElementById('col'+i+'_lin'+j).value);
+			restantesAux.push(['1', '2', '3', '4', '5', '6', '7', '8', '9']);
 		}
 		sudoku.push(linhas);
+		restantes.push(restantesAux);
 	}
 }
 function solucionarSudoku() {
@@ -179,14 +196,21 @@ function solucionarSudoku() {
 	while (reiniciar) {
 		reiniciar = false;
 		for (var i = 1; i <= 9; i++) {
-			verificaLinha(i);
-			verificaColuna(i);
-			verificaQuadrante(i);
+			verificarLinha(i);
+			verificarColuna(i);
+			verificarQuadrante(i);
 		}
 		if (!reiniciar) {
 			for (var i = 1; i <= 9; i++) {
 				for (var j = 1; j <= 9; j++) {
 					analiseSimultanea(i, j);
+				}
+			}
+			if (!reiniciar) {
+				for (var i = 0; i < 9; i++) {
+					for (var j = 0; j < 9; j++) {
+						verificarPossibRestantes(i, j);
+					}
 				}
 			}
 		}
