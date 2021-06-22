@@ -10,7 +10,9 @@ function get(col, lin) {
 	return sudoku[col-1][lin-1];
 }
 function set(col, lin, val) {
-	sudoku[col-1][lin-1] = val;
+	col--;
+	lin--;
+	sudoku[col][lin] = val;
 	verificarPossibRestantes(col, lin);
 	reiniciar = true;
 }
@@ -159,6 +161,31 @@ function verificarLinha(lin) {
 		set(posicao, lin, possibilidades[0]);
 	}
 }
+function exportarSudoku() {
+	var saida = '';
+	for (var i = 1; i <= 9; i++) {
+		for (var j = 1; j <= 9; j++) {
+			saida += get(i, j) || '0';
+		}
+	}
+	document.getElementById('hash_sudoku').innerText = saida;
+}
+function importarSudoku() {
+	var entrada = prompt('Informe o Hash:');
+	var pos = 0;
+	if (entrada.length == 81) {
+		for (var i = 1; i <= 9; i++) {
+			for (var j = 1; j <= 9; j++) {
+				if (entrada[pos] != '0') {
+					document.getElementById('col'+i+'_lin'+j).value = entrada[pos];
+				}
+				pos++;
+			}
+		}
+	} else {
+		alert('Hash inválido!');
+	}
+}
 function montarSudokuEmTela() {
 	for (var i = 1; i <= 9; i++) {
 		for (var j = 1; j <= 9; j++) {
@@ -192,7 +219,7 @@ function inicializarMatriz() {
 	}
 }
 function solucionarSudoku() {
-	//inicializarMatriz();
+	inicializarMatriz();
 	while (reiniciar) {
 		reiniciar = false;
 		for (var i = 1; i <= 9; i++) {
@@ -215,5 +242,5 @@ function solucionarSudoku() {
 			}
 		}
 	}
-	//montarSudokuEmTela();
+	montarSudokuEmTela();
 }
