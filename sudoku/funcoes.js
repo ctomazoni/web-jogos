@@ -162,6 +162,7 @@ function verificarLinha(lin) {
 	}
 }
 function exportarSudoku() {
+	inicializarMatriz();
 	var saida = '';
 	for (var i = 1; i <= 9; i++) {
 		for (var j = 1; j <= 9; j++) {
@@ -202,6 +203,33 @@ function verificarPossibRestantes(col, lin) {
 			removeArrayElementByValue(restantes[i][lin], valor);
 			removeArrayElementByValue(restantes[quad.c[i]-1][quad.l[i]-1], valor);
 		}
+		restantes[col][lin] = [];
+	}
+}
+function verificarPossibUnica() {
+	var unicaPossib = [];
+	for (var n = 1; n < 10; n++) {
+		var num = n.toString();
+		for (var i = 0; i < 9; i++) {
+			for (var j = 0; j < 9; j++) {
+				if (restantes[i][j].includes(num)) {
+					unicaPossib.push(j+1);
+				}
+			}
+			if (unicaPossib.length == 1) {
+				set(i+1, unicaPossib[0], num);
+			}
+			unicaPossib = [];
+			for (var j = 0; j < 9; j++) {
+				if (restantes[j][i].includes(num)) {
+					unicaPossib.push(j+1);
+				}
+			}
+			if (unicaPossib.length == 1) {
+				set(unicaPossib[0], i+1, num);
+			}
+			unicaPossib = [];
+		}
 	}
 }
 function inicializarMatriz() {
@@ -216,6 +244,11 @@ function inicializarMatriz() {
 		}
 		sudoku.push(linhas);
 		restantes.push(restantesAux);
+	}
+	for (var i = 0; i < 9; i++) {
+		for (var j = 0; j < 9; j++) {
+			verificarPossibRestantes(i, j);
+		}
 	}
 }
 function solucionarSudoku() {
@@ -234,11 +267,7 @@ function solucionarSudoku() {
 				}
 			}
 			if (!reiniciar) {
-				for (var i = 0; i < 9; i++) {
-					for (var j = 0; j < 9; j++) {
-						verificarPossibRestantes(i, j);
-					}
-				}
+				verificarPossibUnica();
 			}
 		}
 	}
