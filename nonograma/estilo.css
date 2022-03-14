@@ -1,0 +1,33 @@
+#grid {
+	margin: 10px auto;
+	border-collapse: collapse;
+}
+td {
+	width: 80px;
+	height: 80px;
+	border: 1px solid #000000;
+}
+.info {
+	color: #FFFFFF;
+	background-color: #0078D7;
+	font-size: 30px;
+	text-align: center;
+}
+.top-left_corner {
+	border-top-color: #FFFFFF;
+	border-left-color: #FFFFFF;
+}
+.yes {
+	width: 76px;
+	height: 76px;
+	background-color: #000000;
+	margin: 2px;
+}
+.no::before {
+	width: 40px;
+	height: 40px;
+	margin: 20px;
+	content: "\01F5D9";
+	color: #FF0000;
+	font-size: 40px;
+}

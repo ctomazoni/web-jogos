@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="Cleber Tomazoni">
+		<link rel="stylesheet" href="estilo.css">
+		<script src="funcoes.js"></script>
+		<title>WebJogos - Nonograma</title>
+	</head>
+	<body>
+		<input type="number" id="qtdLin" placeholder="Linha(s)"/>
+		<input type="number" id="qtdCol" placeholder="Coluna(s)"/>
+		<input type="button" id="gerar" onclick="gerar();" value="Gerar"/>
+		<input style="display: none;" type="text" id="valores" placeholder="Valores"/>
+		<input style="display: none;" type="button" id="definir" onclick="definir();" value="Definir"/>
+		<table id="grid">
+		</table>
+	</body>
+</html>
