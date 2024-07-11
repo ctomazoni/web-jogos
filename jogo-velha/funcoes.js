@@ -16,7 +16,9 @@ function venceuPartida(x, y, z) {
 	document.getElementById(y).style.color = '#FF0000';
 	document.getElementById(z).style.color = '#FF0000';
 	terminou = true;
-	alert('Jogador ' + vez + ' ganhou!');
+	setTimeout(() => {
+		alert('Jogador ' + vez + ' ganhou!');
+	});
 }
 
 function verificaPartida() {
